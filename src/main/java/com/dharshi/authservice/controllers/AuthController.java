@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
-
+@CrossOrigin(origins = "https://frontend-eight-liard-29.vercel.app")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -25,29 +25,29 @@ public class AuthController {
 
     @PostMapping("/signup")
     ResponseEntity<ApiResponseDto<?>> registerUser(@RequestBody @Valid SignUpRequestDto signUpRequestDto)
-            throws UnsupportedEncodingException, UserAlreadyExistsException, ServiceLogicException{
+            throws UnsupportedEncodingException, UserAlreadyExistsException, ServiceLogicException {
         return authService.registerUser(signUpRequestDto);
     }
 
     @GetMapping("/signup/resend")
     ResponseEntity<ApiResponseDto<?>> resendVerificationCode(@RequestParam String email)
-            throws UnsupportedEncodingException, UserNotFoundException, ServiceLogicException{
+            throws UnsupportedEncodingException, UserNotFoundException, ServiceLogicException {
         return authService.resendVerificationCode(email);
     }
 
     @GetMapping("/signup/verify")
     ResponseEntity<ApiResponseDto<?>> verifyRegistrationVerification(@RequestParam String code)
-            throws UserVerificationFailedException{
+            throws UserVerificationFailedException {
         return authService.verifyRegistrationVerification(code);
     }
 
     @PostMapping("/signin")
-    ResponseEntity<ApiResponseDto<?>> authenticateUser(@RequestBody @Valid SignInRequestDto signInRequestDto){
+    ResponseEntity<ApiResponseDto<?>> authenticateUser(@RequestBody @Valid SignInRequestDto signInRequestDto) {
         return authService.authenticateUser(signInRequestDto);
     }
 
     @GetMapping("/isValidToken")
-    ResponseEntity<ApiResponseDto<?>> validateToken(@RequestParam String token){
+    ResponseEntity<ApiResponseDto<?>> validateToken(@RequestParam String token) {
         return authService.validateToken(token);
     }
 
